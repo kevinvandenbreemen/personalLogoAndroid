@@ -16,16 +16,32 @@ class LogoSplash : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val animator = ValueAnimator.ofFloat(0.0f, 1.0f)
-        animator.addUpdateListener {
+        val kevinAnimator = getAnimator()
+        kevinAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             kevin.alpha = value
-
         }
+        kevinAnimator.startDelay = 500
+
+
+        val flareAnimator = getAnimator()
+        flareAnimator.addUpdateListener {
+            val value = it.animatedValue as Float
+            flare.alpha = value
+        }
+
+        flareAnimator.start()
+        kevinAnimator.start()
+
+
+    }
+
+    fun getAnimator(): ValueAnimator {
+        val animator = ValueAnimator.ofFloat(0.0f, 1.0f)
         animator.duration = 1500
         animator.interpolator = LinearInterpolator()
-        animator.start()
 
+        return animator
 
     }
 }
